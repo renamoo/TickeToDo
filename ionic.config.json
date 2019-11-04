@@ -1,5 +1,7 @@
 {
   "name": "tickeToDo",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
