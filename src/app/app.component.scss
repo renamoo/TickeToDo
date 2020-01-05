@@ -1,0 +1,9 @@
+.todo_ticket {
+  display: flex;
+  .ticket_content {
+    flex-grow: 7;
+  }
+  .ticket_action {
+    flex-grow: 3;
+  }
+}
