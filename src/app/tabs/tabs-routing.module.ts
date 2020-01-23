@@ -46,7 +46,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/daily',
+    redirectTo: 'daily',
     pathMatch: 'full'
   }
 ];
