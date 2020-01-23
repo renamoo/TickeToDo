@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform } from '@ionic/angular';
-import { firebaseConfig } from 'firebase.init';
-import * as firebase from 'firebase/app';
-import * as firebaseui from 'firebaseui';
+import { FirebaseService } from './login/firebase.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +13,8 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private firebaseService: FirebaseService
   ) {
     this.initializeApp();
   }
@@ -25,14 +24,6 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-    firebase.initializeApp(firebaseConfig);
-    // firebase.analytics();
-    const ui = new firebaseui.auth.AuthUI(firebase.auth());
-    ui.start('#firebaseui-auth-container', {
-      signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID
-      ],
-      // Other config options...
-    });
+    this.firebaseService.init();
   }
 }
