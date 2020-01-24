@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import * as firebaseui from 'firebaseui';
+import { FirebaseService } from './firebase.service';
 
 @Component({
   selector: 'app-login-page',
@@ -10,9 +11,23 @@ import * as firebaseui from 'firebaseui';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private firebaseService: FirebaseService) { }
 
   ngOnInit() {
+    this.isLoggedIn();
+    this.loadUI();
+  }
+
+  isLoggedIn() {
+    const user = this.firebaseService.getUser();
+    if (user) {
+      this.router.navigate(['main/tabs/daily']);
+    }
+  }
+
+  loadUI() {
     const ui = new firebaseui.auth.AuthUI(firebase.auth());
     ui.start('#firebaseui-auth-container', {
       signInSuccessUrl: 'main/tabs/daily',
