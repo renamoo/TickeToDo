@@ -1,12 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { DbService } from './../db.service';
+import { ToDo } from './../models';
+
 
 @Component({
   selector: 'app-daily',
   templateUrl: 'daily.page.html',
   styleUrls: ['daily.page.scss']
 })
-export class DailyPage {
+export class DailyPage implements OnInit {
+  todos$: Observable<ToDo[]>;
 
-  constructor() { }
+  constructor(private dbService: DbService) { }
 
+  ngOnInit() {
+    this.todos$ = this.dbService.getToDos();
+  }
 }

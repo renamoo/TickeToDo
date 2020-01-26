@@ -26,6 +26,7 @@
     "@ionic/angular": "^4.7.1",
     "cordova-ios": "5.0.1",
     "core-js": "^2.5.4",
+    "dayjs": "^1.8.19",
     "firebase": "^7.6.2",
     "firebaseui": "^4.4.0",
     "rxjs": "~6.5.1",
@@ -34,7 +35,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.801.2",
-    "@angular-devkit/build-angular": "~0.801.2",
+    "@angular-devkit/build-angular": "^0.803.23",
     "@angular-devkit/core": "~8.1.2",
     "@angular-devkit/schematics": "~8.1.2",
     "@angular/cli": "~8.1.2",
