@@ -1,41 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Today's Todo
+    <ion-title color="primary">Add ToDo
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list lines="none">
-    <ion-list-header>
-      <ion-label>Resources</ion-label>
-    </ion-list-header>
-    <ion-item>
-      <ion-card class="todo_ticket">
-        <div class="ticket_content">
-          <ion-card-header>
-            <ion-card-subtitle>Get Started</ion-card-subtitle>
-            <ion-card-title>Welcome to Ionic</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>
-              Now that your app has been created, you'll want to start building
-              out features and components. Check out some of the resources below
-              for next steps.
-            </p>
-          </ion-card-content>
-        </div>
-        <div class="ticket_action">
-          <ion-card-content>
-            <p>
-              Now that your app has been created, you'll want to start building
-              out features and components. Check out some of the resources below
-              for next steps.
-            </p>
-          </ion-card-content>
-        </div>
-      </ion-card>
+<ion-content class="content">
+  <form [formGroup]="form">
+    <ion-item class="item">
+      <ion-label position="stacked">ToDo</ion-label>
+      <ion-textarea formControlName="toDo" rows="1">
+      </ion-textarea>
     </ion-item>
-  </ion-list>
+    <ion-item class="item">
+      <ion-label position="stacked">Date</ion-label>
+      <ion-datetime displayFormat="MMMM DD" formControlName="date"></ion-datetime>
+    </ion-item>
+  </form>
+  <ion-button color="primary" shape="round" fill="outline" (click)="onSave()">Save</ion-button>
 </ion-content>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform } from '@ionic/angular';
+import { DbService } from './db.service';
 import { FirebaseService } from './login/firebase.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private dbService: DbService
   ) {
     this.initializeApp();
   }
@@ -25,5 +27,6 @@ export class AppComponent {
       this.splashScreen.hide();
     });
     this.firebaseService.init();
+    this.dbService.init();
   }
 }
