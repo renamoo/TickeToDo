@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { first } from 'rxjs/operators';
+import { DbService } from './../services/db.service';
 
 @Component({
   selector: 'app-add',
@@ -9,16 +11,21 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class AddPage implements OnInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private dbService: DbService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
-      toDo: null,
+      todo: null,
       date: null
     });
   }
 
   onSave() {
-    console.log(this.form.getRawValue());
+    this.dbService.addToDo(this.form.getRawValue())
+      .pipe(first()).subscribe(() => {
+        this.form.reset();
+      });
   }
 }
