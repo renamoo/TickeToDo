@@ -3,8 +3,9 @@ import * as dayjs from 'dayjs';
 import * as firebase from 'firebase';
 import { from, Observable, of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
-import { FirebaseService } from './login/firebase.service';
-import { ToDo } from './models';
+import { ToDo } from '../models';
+import { FirebaseService } from './../login/firebase.service';
+import { DraftToDo } from './../models';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,16 @@ export class DbService {
             return of(data);
           }),
         );
+  }
+
+  addToDo(draft: DraftToDo): Observable<void> {
+    const user = this.firebaseService.getUser().uid;
+    return from(this.db.collection('todos').doc().set(
+      {
+        ...draft,
+        date: firebase.firestore.Timestamp.fromDate(new Date(draft.date)),
+        userId: user
+      }
+    ));
   }
 }

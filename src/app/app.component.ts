@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform } from '@ionic/angular';
-import { DbService } from './db.service';
 import { FirebaseService } from './login/firebase.service';
+import { DbService } from './services/db.service';
 
 @Component({
   selector: 'app-root',
