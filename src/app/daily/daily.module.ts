@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { DailyPage } from './daily.page';
+import { TicketComponent } from './ticket/ticket.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { DailyPage } from './daily.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: DailyPage }])
   ],
-  declarations: [DailyPage]
+  declarations: [DailyPage, TicketComponent]
 })
 export class DailyPageModule { }

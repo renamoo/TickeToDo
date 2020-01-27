@@ -1,0 +1,6 @@
+<div class="ticket">
+  <div class="left">{{todo}}</div>
+  <div class="right" (click)="markAsDone()">
+    <ion-icon class="icon" [class.done]="isDone" name="checkmark-circle-outline"></ion-icon>
+  </div>
+</div>

@@ -15,6 +15,11 @@ export class DailyPage implements OnInit {
   constructor(private dbService: DbService) { }
 
   ngOnInit() {
-    this.todos$ = this.dbService.getToDos();
+    this.todos$ = this.dbService.todos$;
+    this.dbService.getToDos();
+  }
+
+  trackBy(i, todo: ToDo) {
+    return todo.id;
   }
 }

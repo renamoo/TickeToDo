@@ -1,0 +1,30 @@
+.ticket{
+    display:flex;
+    width:100%;
+    .left{
+        border-radius:7px;
+        background-color:white;
+        min-height:50px;
+        flex-grow:1;
+        border-right: 1px dashed black;
+        padding:5px;
+    }
+    .right{
+        border-radius:7px;
+        background-color:white;
+        min-height:55px;
+        width: 15vw;
+        text-align:center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .icon{
+        width: 80%;
+        height: 80%;
+        color: rgb(0,0,0,0.3);
+        &.done{
+            color: #94c0c2;
+        }
+    }
+}
