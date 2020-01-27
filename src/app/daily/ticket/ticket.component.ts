@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { first } from 'rxjs/operators';
 import { DbService } from './../../services/db.service';
 
 @Component({
@@ -18,14 +17,12 @@ export class TicketComponent implements OnInit, OnChanges {
 
   ngOnChanges(sc: SimpleChanges) {
     if (sc.isDone) {
-      console.log('done');
+      // animation
     }
   }
 
   markAsDone() {
-    this.dbService.updateToDo(this.id, { isDone: true })
-      .pipe(first())
-      .subscribe(() => console.log('UUU'));
+    this.dbService.updateToDo(this.id, { isDone: true });
   }
 
 }
