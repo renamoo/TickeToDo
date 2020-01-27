@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as dayjs from 'dayjs';
 import * as firebase from 'firebase';
-import { from, Observable, of } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { BehaviorSubject, from, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { ToDo } from '../models';
 import { FirebaseService } from './../login/firebase.service';
 import { DraftToDo } from './../models';
@@ -11,7 +11,12 @@ import { DraftToDo } from './../models';
   providedIn: 'root'
 })
 export class DbService {
-  db: firebase.firestore.Firestore;
+  private db: firebase.firestore.Firestore;
+  private _todos$ = new BehaviorSubject<ToDo[]>([]);
+
+  get todos$() {
+    return this._todos$.asObservable();
+  }
 
   constructor(private firebaseService: FirebaseService) { }
 
@@ -19,28 +24,27 @@ export class DbService {
     this.db = firebase.firestore();
   }
 
-  getToDos(): Observable<ToDo[]> {
+  getToDos(): void {
     const today = dayjs().format('YYYY/MM/DD');
     const tomorrow = dayjs().add(1, 'day').format('YYYY/MM/DD');
     const userId = this.firebaseService.getUser().uid;
-    return from(
+    from(
       this.db.collection('todos')
         .where('userId', '==', userId)
         .where('date', '>=', new Date(today))
         .where('date', '<', new Date(tomorrow))
-        .get()).pipe(
-          flatMap(querySnapshot => {
-            const data = [];
-            querySnapshot.forEach((doc) => {
-              const d = doc.data();
-              data.push({
-                ...d,
-                date: d.date.toDate()
-              });
+        .get()).subscribe(querySnapshot => {
+          const data = [];
+          querySnapshot.forEach((doc) => {
+            const d = doc.data();
+            data.push({
+              ...d,
+              date: d.date.toDate(),
+              id: doc.id
             });
-            return of(data);
-          }),
-        );
+          });
+          this._todos$.next(data);
+        });
   }
 
   addToDo(draft: DraftToDo): Observable<void> {
@@ -49,8 +53,15 @@ export class DbService {
       {
         ...draft,
         date: firebase.firestore.Timestamp.fromDate(new Date(draft.date)),
+        isDone: false,
         userId: user
       }
-    ));
+    )).pipe(tap(() => this.getToDos()));
+  }
+
+  updateToDo(id: string, updates: Partial<ToDo>): Observable<void> {
+    return from(this.db.collection('todos').doc(id).set(
+      updates, { merge: true }
+    )).pipe(tap(() => this.getToDos()));
   }
 }

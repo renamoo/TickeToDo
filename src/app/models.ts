@@ -5,4 +5,6 @@ export interface DraftToDo {
 
 export interface ToDo extends DraftToDo {
     userId: string;
+    isDone: boolean;
+    id: string;
 }
