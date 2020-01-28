@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import * as firebaseui from 'firebaseui';
+import { from } from 'rxjs';
+import { first, map, tap } from 'rxjs/operators';
 import { FirebaseService } from './firebase.service';
 
 @Component({
@@ -16,15 +18,16 @@ export class LoginPageComponent implements OnInit {
     private firebaseService: FirebaseService) { }
 
   ngOnInit() {
-    this.isLoggedIn();
-    this.loadUI();
-  }
-
-  isLoggedIn() {
-    const user = this.firebaseService.getUser();
-    if (user) {
-      this.router.navigate(['main/tabs/daily']);
-    }
+    this.firebaseService.isLoggedIn$.pipe(first(),
+      tap(user => {
+        if (user) {
+          this.router.navigate(['main/tabs/daily']);
+        }
+      }),
+      map(() => from(firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)))
+    ).subscribe(() => {
+      this.loadUI();
+    }, error => console.log(error.code, error.message));
   }
 
   loadUI() {
@@ -32,7 +35,6 @@ export class LoginPageComponent implements OnInit {
     ui.start('#firebaseui-auth-container', {
       signInSuccessUrl: 'main/tabs/daily',
       signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
         firebase.auth.GoogleAuthProvider.PROVIDER_ID
       ],
