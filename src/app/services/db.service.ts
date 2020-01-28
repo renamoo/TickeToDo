@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import * as dayjs from 'dayjs';
 import * as firebase from 'firebase';
 import { BehaviorSubject, from, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { ToDo } from '../models';
 import { FirebaseService } from './../login/firebase.service';
 import { DraftToDo } from './../models';
@@ -56,12 +55,16 @@ export class DbService {
         isDone: false,
         userId: user
       }
-    )).pipe(tap(() => this.getToDos()));
+    ));
   }
 
   updateToDo(id: string, updates: Partial<ToDo>): Observable<void> {
     return from(this.db.collection('todos').doc(id).set(
       updates, { merge: true }
-    )).pipe(tap(() => this.getToDos()));
+    ));
+  }
+
+  deleteToDo(id: string) {
+    return from(this.db.collection('todos').doc(id).delete());
   }
 }

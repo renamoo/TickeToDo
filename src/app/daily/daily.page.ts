@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import * as dayjs from 'dayjs';
 import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { DbService } from '../services/db.service';
 import { ToDo } from './../models';
 
@@ -13,11 +15,20 @@ export class DailyPage implements OnInit {
   todos$: Observable<ToDo[]>;
   date = new Date();
   dateStr = dayjs(this.date).format('MM/DD');
+  mode: 'none' | 'delete' | 'edit' = 'none';
 
-  constructor(private dbService: DbService) { }
+  constructor(private dbService: DbService, private router: Router) { }
 
   ngOnInit() {
     this.todos$ = this.dbService.todos$;
+    this.router.events.pipe(
+      filter(event => (event instanceof NavigationEnd))
+    ).subscribe(event => {
+      this.loadTodos();
+    });
+  }
+
+  loadTodos() {
     this.dbService.getToDos(this.date);
   }
 
@@ -28,12 +39,20 @@ export class DailyPage implements OnInit {
   prevDate() {
     this.date = dayjs(this.date).subtract(1, 'day').toDate();
     this.dateStr = dayjs(this.date).format('MM/DD');
-    this.dbService.getToDos(this.date);
+    this.loadTodos();
   }
 
   nextDate() {
     this.date = dayjs(this.date).add(1, 'day').toDate();
     this.dateStr = dayjs(this.date).format('MM/DD');
-    this.dbService.getToDos(this.date);
+    this.loadTodos();
+  }
+
+  onUpdateTodo() {
+    this.loadTodos();
+  }
+
+  changeMode(mode: 'none' | 'delete' | 'edit') {
+    this.mode = mode;
   }
 }
