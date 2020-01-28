@@ -24,9 +24,9 @@ export class DbService {
     this.db = firebase.firestore();
   }
 
-  getToDos(): void {
-    const today = dayjs().format('YYYY/MM/DD');
-    const tomorrow = dayjs().add(1, 'day').format('YYYY/MM/DD');
+  getToDos(targetDate: Date): void {
+    const today = dayjs(targetDate).format('YYYY/MM/DD');
+    const tomorrow = dayjs(targetDate).add(1, 'day').format('YYYY/MM/DD');
     const userId = this.firebaseService.getUser().uid;
     from(
       this.db.collection('todos')

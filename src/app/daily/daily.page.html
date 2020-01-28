@@ -1,8 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title color="primary">
-      Today's Todo
+    <ion-button (click)="prevDate()" color="secondary">
+      <ion-icon name="arrow-dropleft"></ion-icon>
+    </ion-button>
+    <ion-title class="title" color="primary">
+      Todos for {{dateStr}}
     </ion-title>
+    <ion-button (click)="nextDate()" color="secondary" slot="end">
+      <ion-icon name="arrow-dropright"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
