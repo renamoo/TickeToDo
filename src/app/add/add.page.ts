@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import * as dayjs from 'dayjs';
 import { first } from 'rxjs/operators';
 import { DbService } from './../services/db.service';
 
@@ -16,9 +17,10 @@ export class AddPage implements OnInit {
     private dbService: DbService) { }
 
   ngOnInit() {
+    const today = dayjs().format('YYYY/MM/DD');
     this.form = this.fb.group({
       todo: null,
-      date: null
+      date: today
     });
   }
 
