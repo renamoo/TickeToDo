@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform } from '@ionic/angular';
-import { FirebaseService } from './login/firebase.service';
+import { FirebaseService } from './pages/login/firebase.service';
 import { DbService } from './services/db.service';
 
 @Component({

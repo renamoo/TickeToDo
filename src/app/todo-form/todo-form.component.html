@@ -1,0 +1,11 @@
+<form [formGroup]="form">
+  <ion-item class="item">
+    <ion-label position="stacked">ToDo</ion-label>
+    <ion-textarea formControlName="todo" rows="1">
+    </ion-textarea>
+  </ion-item>
+  <ion-item class="item">
+    <ion-label position="stacked">Date</ion-label>
+    <ion-datetime displayFormat="MMMM DD" formControlName="date"></ion-datetime>
+  </ion-item>
+</form>

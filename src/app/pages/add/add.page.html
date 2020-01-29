@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="primary">Add ToDo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content" color="light">
+  <app-todo-form [form]="form"></app-todo-form>
+  <ion-button color="primary" shape="round" fill="outline" (click)="onSave()">Save</ion-button>
+</ion-content>

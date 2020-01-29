@@ -3,8 +3,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import * as dayjs from 'dayjs';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { DbService } from '../services/db.service';
-import { ToDo } from './../models';
+import { ToDo } from '../../models';
+import { DbService } from '../../services/db.service';
 
 @Component({
   selector: 'app-daily',

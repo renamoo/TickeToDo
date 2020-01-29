@@ -13,7 +13,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../daily/daily.module').then(m => m.DailyPageModule)
+              import('../pages/daily/daily.module').then(m => m.DailyPageModule)
           }
         ]
       },
@@ -23,7 +23,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../add/add.module').then(m => m.AddPageModule)
+              import('../pages/add/add.module').then(m => m.AddPageModule)
           }
         ]
       },
@@ -33,7 +33,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../setting/setting.module').then(m => m.SettingPageModule)
+              import('../pages/setting/setting.module').then(m => m.SettingPageModule)
           }
         ]
       },

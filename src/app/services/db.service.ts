@@ -3,7 +3,7 @@ import * as dayjs from 'dayjs';
 import * as firebase from 'firebase';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { ToDo } from '../models';
-import { FirebaseService } from './../login/firebase.service';
+import { FirebaseService } from '../pages/login/firebase.service';
 import { DraftToDo } from './../models';
 
 @Injectable({

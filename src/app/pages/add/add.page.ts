@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as dayjs from 'dayjs';
 import { first } from 'rxjs/operators';
-import { DbService } from './../services/db.service';
+import { DbService } from '../../services/db.service';
 
 @Component({
   selector: 'app-add',

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { DbService } from './../../services/db.service';
+import { DbService } from '../../../services/db.service';
 
 @Component({
   selector: 'app-ticket',
