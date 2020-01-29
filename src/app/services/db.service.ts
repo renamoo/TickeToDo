@@ -3,7 +3,7 @@ import * as dayjs from 'dayjs';
 import * as firebase from 'firebase';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { ToDo } from '../models';
-import { FirebaseService } from './../login/firebase.service';
+import { FirebaseService } from '../pages/login/firebase.service';
 import { DraftToDo } from './../models';
 
 @Injectable({
@@ -59,8 +59,9 @@ export class DbService {
   }
 
   updateToDo(id: string, updates: Partial<ToDo>): Observable<void> {
+    const parsedUpdates = updates.date ? { ...updates, date: new Date(updates.date) } : updates;
     return from(this.db.collection('todos').doc(id).set(
-      updates, { merge: true }
+      parsedUpdates, { merge: true }
     ));
   }
 

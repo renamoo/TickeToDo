@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { TodoFormModule } from '../../todo-form/todo-form.module';
 import { AddPage } from './add.page';
 
 @NgModule({
@@ -11,6 +12,7 @@ import { AddPage } from './add.page';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    TodoFormModule,
     RouterModule.forChild([{ path: '', component: AddPage }])
   ],
   declarations: [AddPage]
