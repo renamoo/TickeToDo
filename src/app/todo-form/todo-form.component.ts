@@ -8,9 +8,12 @@ import { FormGroup } from '@angular/forms';
 })
 export class TodoFormComponent implements OnInit {
   @Input() form: FormGroup;
+  isEditMode: boolean;
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.form.value.isDone) { this.isEditMode = true; }
+  }
 
 }

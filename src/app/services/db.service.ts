@@ -59,8 +59,9 @@ export class DbService {
   }
 
   updateToDo(id: string, updates: Partial<ToDo>): Observable<void> {
+    const parsedUpdates = updates.date ? { ...updates, date: new Date(updates.date) } : updates;
     return from(this.db.collection('todos').doc(id).set(
-      updates, { merge: true }
+      parsedUpdates, { merge: true }
     ));
   }
 

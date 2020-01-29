@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import * as dayjs from 'dayjs';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -17,7 +18,10 @@ export class DailyPage implements OnInit {
   dateStr = dayjs(this.date).format('MM/DD');
   mode: 'none' | 'delete' | 'edit' = 'none';
 
-  constructor(private dbService: DbService, private router: Router) { }
+  constructor(
+    private dbService: DbService,
+    private router: Router,
+    private modalController: ModalController) { }
 
   ngOnInit() {
     this.todos$ = this.dbService.todos$;
@@ -55,4 +59,6 @@ export class DailyPage implements OnInit {
   changeMode(mode: 'none' | 'delete' | 'edit') {
     this.mode = mode;
   }
+
+
 }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -6,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-dialog.component.scss'],
 })
 export class EditDialogComponent implements OnInit {
+  @Input() form: FormGroup;
+  @Input() event$: Subject<void>;
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  onSave() {
+    this.event$.next();
+  }
 
 }
