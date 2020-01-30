@@ -27,10 +27,6 @@
 <ion-footer class="footer">
   <div class="buttons">
     <ion-button *ngIf="mode === 'none'" shape="round" fill="clear" size="small" expand="full"
-      (click)="changeMode('edit')">
-      <ion-icon slot="start" class="icon" name="create"></ion-icon>
-    </ion-button>
-    <ion-button *ngIf="mode === 'none'" shape="round" fill="clear" size="small" expand="full"
       (click)="changeMode('delete')">
       <ion-icon slot="start" class="icon" name="trash"></ion-icon>
     </ion-button>

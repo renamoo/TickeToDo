@@ -1,8 +1,7 @@
 <div class="ticket">
-  <div class="left">{{todo}}</div>
+  <div class="left" (click)="onLeftClick()">{{todo}}</div>
   <div class="right" (click)="onRightClick()" [ngSwitch]="mode">
     <ion-icon *ngSwitchCase="'none'" class="icon" [class.done]="isDone" name="checkmark-circle-outline"></ion-icon>
     <ion-icon *ngSwitchCase="'delete'" class="icon" name="close" color="danger"></ion-icon>
-    <ion-icon *ngSwitchCase="'edit'" class="icon" name="create" color="warning"></ion-icon>
   </div>
 </div>

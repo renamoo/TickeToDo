@@ -13,7 +13,7 @@ import { DailyStateService } from './../../services/daily-state.service';
 })
 export class DailyPage implements OnInit {
   todos$: Observable<ToDo[]>;
-  mode: 'none' | 'delete' | 'edit' = 'none';
+  mode: 'none' | 'delete' = 'none';
 
   constructor(
     private dbService: DbService,
@@ -45,7 +45,7 @@ export class DailyPage implements OnInit {
     this.stateService.loadTodos();
   }
 
-  changeMode(mode: 'none' | 'delete' | 'edit') {
+  changeMode(mode: 'none' | 'delete') {
     this.mode = mode;
   }
 
