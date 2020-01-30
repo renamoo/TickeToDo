@@ -49,5 +49,12 @@ export class DailyPage implements OnInit {
     this.mode = mode;
   }
 
+  onSwipe(event) {
+    if (event.direction === 2) {
+      this.nextDate();
+    } else if (event.direction === 4) {
+      this.prevDate();
+    }
+  }
 
 }
