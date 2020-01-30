@@ -25,9 +25,10 @@ export class AddPage implements OnInit {
   }
 
   onSave() {
+    const today = dayjs().format('YYYY/MM/DD');
     this.dbService.addToDo(this.form.getRawValue())
       .pipe(first()).subscribe(() => {
-        this.form.reset();
+        this.form.reset({ date: today });
       });
   }
 }

@@ -4,7 +4,7 @@
       <ion-icon name="arrow-dropleft"></ion-icon>
     </ion-button>
     <ion-title class="title" color="primary">
-      Todos for {{dateStr}}
+      Todos for {{stateService.dateStr}}
     </ion-title>
     <ion-button (click)="nextDate()" color="secondary" slot="end">
       <ion-icon name="arrow-dropright"></ion-icon>
@@ -16,8 +16,8 @@
   <ion-list class="list" lines="none">
     <ng-container *ngFor="let todo of todos$ | async; trackBy: trackBy">
       <ion-item lines="none">
-        <app-ticket class="ticket" [todo]="todo.todo" [isDone]="todo.isDone" [id]="todo.id" [mode]="mode" [date]="date"
-          (updateTodo)="onUpdateTodo()"></app-ticket>
+        <app-ticket class="ticket" [todo]="todo.todo" [isDone]="todo.isDone" [id]="todo.id" [mode]="mode"
+          [date]="stateService.date" (updateTodo)="onUpdateTodo()"></app-ticket>
       </ion-item>
     </ng-container>
   </ion-list>
