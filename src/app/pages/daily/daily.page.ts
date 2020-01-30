@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
 import * as dayjs from 'dayjs';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -20,8 +19,7 @@ export class DailyPage implements OnInit {
 
   constructor(
     private dbService: DbService,
-    private router: Router,
-    private modalController: ModalController) { }
+    private router: Router) { }
 
   ngOnInit() {
     this.todos$ = this.dbService.todos$;
