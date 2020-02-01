@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="container" color="light">
+<ion-content class="container" color="light" (swipe)="onSwipe($event)">
   <ion-list class="list" lines="none">
     <ng-container *ngFor="let todo of todos$ | async; trackBy: trackBy">
       <ion-item lines="none">
@@ -26,10 +26,6 @@
 
 <ion-footer class="footer">
   <div class="buttons">
-    <ion-button *ngIf="mode === 'none'" shape="round" fill="clear" size="small" expand="full"
-      (click)="changeMode('edit')">
-      <ion-icon slot="start" class="icon" name="create"></ion-icon>
-    </ion-button>
     <ion-button *ngIf="mode === 'none'" shape="round" fill="clear" size="small" expand="full"
       (click)="changeMode('delete')">
       <ion-icon slot="start" class="icon" name="trash"></ion-icon>

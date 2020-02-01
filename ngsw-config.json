@@ -2,8 +2,8 @@
   "$schema": "./node_modules/@angular/service-worker/config/schema.json",
   "index": "/index.html",
   "appData": {
-    "version": "1.1.7",
-    "changelog": "add jump for today func"
+    "version": "1.1.9",
+    "changelog": "fix ui"
   },
   "assetGroups": [
     {

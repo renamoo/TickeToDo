@@ -43,11 +43,11 @@ export class TicketComponent implements OnInit, OnChanges {
           this.updateTodo.emit();
         });
         break;
-      case 'edit':
-        this.presentModal();
-        break;
     }
+  }
 
+  onLeftClick() {
+    this.presentModal();
   }
 
   update(updates: Partial<ToDo>) {
