@@ -4,8 +4,8 @@ import { PopoverController } from '@ionic/angular';
 import * as dayjs from 'dayjs';
 import { Subject } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { DbService } from '../../../services/db.service';
-import { ToDo } from './../../../models';
+import { DbService } from '../../services/db.service';
+import { ToDo } from './../../models';
 import { EditDialogComponent } from './../edit-dialog/edit-dialog.component';
 
 @Component({
@@ -18,7 +18,7 @@ export class TicketComponent implements OnInit, OnChanges {
   @Input() isDone: boolean;
   @Input() id: string;
   @Input() date: Date;
-  @Input() mode: 'none' | 'delete' | 'edit' = 'none';
+  @Input() mode: 'none' | 'delete' = 'none';
   @Output() updateTodo = new EventEmitter<void>();
 
   constructor(
