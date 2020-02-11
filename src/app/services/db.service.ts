@@ -12,9 +12,14 @@ import { DraftToDo } from './../models';
 export class DbService {
   private db: firebase.firestore.Firestore;
   private _todos$ = new BehaviorSubject<ToDo[]>([]);
+  private _allTodos$ = new BehaviorSubject<ToDo[]>([]);
 
   get todos$() {
     return this._todos$.asObservable();
+  }
+
+  get allTodos$() {
+    return this._allTodos$.asObservable();
   }
 
   constructor(private firebaseService: FirebaseService) { }
@@ -23,7 +28,31 @@ export class DbService {
     this.db = firebase.firestore();
   }
 
-  getToDos(targetDate?: Date): void {
+  getAllTodos() {
+    const today = dayjs(new Date()).format('YYYY/MM/DD');
+    const userId = this.firebaseService.getUser().uid;
+    from(
+      this.db.collection('todos')
+        .where('userId', '==', userId)
+        .where('date', '>=', new Date(today))
+        .orderBy('date')
+        .orderBy('isDone')
+        .get()).subscribe(querySnapshot => {
+          const data = [];
+          querySnapshot.forEach((doc) => {
+            const d = doc.data();
+            data.push({
+              ...d,
+              date: d.date.toDate(),
+              id: doc.id
+            });
+          });
+          console.log(data);
+          this._allTodos$.next(data);
+        });
+  }
+
+  getTodos(targetDate?: Date): void {
     const today = dayjs(targetDate || new Date()).format('YYYY/MM/DD');
     const tomorrow = dayjs(targetDate || new Date()).add(1, 'day').format('YYYY/MM/DD');
     const userId = this.firebaseService.getUser().uid;
@@ -32,6 +61,8 @@ export class DbService {
         .where('userId', '==', userId)
         .where('date', '>=', new Date(today))
         .where('date', '<', new Date(tomorrow))
+        .orderBy('date')
+        .orderBy('isDone')
         .get()).subscribe(querySnapshot => {
           const data = [];
           querySnapshot.forEach((doc) => {

@@ -14,7 +14,7 @@ export class DailyStateService {
   constructor(private dbService: DbService) { }
 
   loadTodos() {
-    this.dbService.getToDos(this.date);
+    this.dbService.getTodos(this.date);
   }
 
   setPrevDate() {
