@@ -9,8 +9,10 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ListPageModule } from './pages/list/list.module';
 import { LoginPageComponent } from './pages/login/login-page.component';
 import { IonicGestureConfig } from './services/ionic-gesture-config';
+import { TabsPageModule } from './tabs/tabs.module';
 
 @NgModule({
   declarations: [AppComponent, LoginPageComponent],
@@ -19,6 +21,8 @@ import { IonicGestureConfig } from './services/ionic-gesture-config';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    TabsPageModule,
+    ListPageModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     StatusBar,
