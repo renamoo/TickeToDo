@@ -5,3 +5,15 @@
 .button{
     margin: 10px auto;
 }
+
+.icons{
+    margin-right:10px;
+    display: flex;
+    align-items: center;
+    .icon.trash{
+        font-size:1.4rem;
+    }
+    .icon.close{
+        font-size:1.8rem;
+    }
+}

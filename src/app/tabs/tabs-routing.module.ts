@@ -49,14 +49,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/daily',
+        redirectTo: '/tabs/list',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: 'daily',
+    redirectTo: 'list',
     pathMatch: 'full'
   }
 ];

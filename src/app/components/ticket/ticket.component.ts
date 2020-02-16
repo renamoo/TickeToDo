@@ -39,10 +39,7 @@ export class TicketComponent implements OnInit, OnChanges {
       case 'none':
         this.update({ isDone: true }); break;
       case 'delete':
-        this.dbService.deleteToDo(this.id).pipe(first()).subscribe(() => {
-          this.updateTodo.emit();
-        });
-        break;
+        this.delete(); break;
     }
   }
 
@@ -57,15 +54,24 @@ export class TicketComponent implements OnInit, OnChanges {
       });
   }
 
+  delete() {
+    this.dbService.deleteToDo(this.id).pipe(first()).subscribe(() => {
+      this.updateTodo.emit();
+    });
+  }
+
   async presentModal() {
     const formGroup = this.fb.group({
       todo: this.todo,
       date: dayjs(this.date).format('YYYY/MM/DD'),
       isDone: this.isDone
     });
-    const event$ = new Subject<void>();
-    event$.pipe(first()).subscribe(() => {
-      this.update(formGroup.getRawValue());
+    const event$ = new Subject<string>();
+    event$.pipe(first()).subscribe(type => {
+      switch (type) {
+        case 'save': this.update(formGroup.getRawValue()); break;
+        case 'delete': this.delete(); break;
+      }
       this.popoverController.dismiss();
     });
     const modal = await this.popoverController.create({
