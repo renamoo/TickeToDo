@@ -9,14 +9,21 @@ import { Subject } from 'rxjs';
 })
 export class EditDialogComponent implements OnInit {
   @Input() form: FormGroup;
-  @Input() event$: Subject<void>;
+  @Input() event$: Subject<'close' | 'save' | 'delete'>;
 
   constructor() { }
 
   ngOnInit() { }
 
   onSave() {
-    this.event$.next();
+    this.event$.next('save');
   }
 
+  onClose() {
+    this.event$.next('close');
+  }
+
+  onDelete() {
+    this.event$.next('delete');
+  }
 }

@@ -47,7 +47,6 @@ export class DbService {
               id: doc.id
             });
           });
-          console.log(data);
           this._allTodos$.next(data);
         });
   }

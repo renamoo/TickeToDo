@@ -21,7 +21,7 @@ export class LoginPageComponent implements OnInit {
     this.firebaseService.isLoggedIn$.pipe(first(),
       tap(user => {
         if (user) {
-          this.router.navigate(['main/tabs/daily']);
+          this.router.navigate(['main/tabs/list']);
         }
       }),
       map(() => from(firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)))
@@ -33,14 +33,14 @@ export class LoginPageComponent implements OnInit {
   loadUI() {
     const ui = new firebaseui.auth.AuthUI(firebase.auth());
     ui.start('#firebaseui-auth-container', {
-      signInSuccessUrl: 'main/tabs/daily',
+      signInSuccessUrl: 'main/tabs/list',
       signInOptions: [
         firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
         firebase.auth.GoogleAuthProvider.PROVIDER_ID
       ],
       callbacks: {
         signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-          this.router.navigate(['main/tabs/daily']);
+          this.router.navigate(['main/tabs/list']);
           return false;
         },
       },

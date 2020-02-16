@@ -1,6 +1,10 @@
 <ion-list no-margin>
   <ion-list-header color="dark">
     <ion-label class="fw700">Edit Todo</ion-label>
+    <div class="icons">
+      <ion-icon class="icon trash" name="trash" (click)="onDelete()"></ion-icon>
+      <ion-icon class="icon close" name="close" (click)="onClose()"></ion-icon>
+    </div>
   </ion-list-header>
 
   <ion-item class="item" lines="none">
