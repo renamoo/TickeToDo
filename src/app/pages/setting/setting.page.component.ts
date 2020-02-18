@@ -11,4 +11,8 @@ export class SettingPage implements OnInit {
 
   ngOnInit() { }
 
+  onRefresh() {
+    window.location.reload();
+  }
+
 }
